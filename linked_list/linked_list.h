@@ -19,12 +19,14 @@ class LinkedList {
 public:
     LinkedList() {
         size = 0;
-        dummy.next = &dummy;
-        dummy.prev = &dummy;
+        dummy = new Node<T>();
+        dummy->next = dummy;
+        dummy->prev = dummy;
     }
 
     ~LinkedList() {
         clear_list();
+        delete dummy;
     }
 
     // // copy constructor
@@ -80,20 +82,20 @@ public:
     }
 
     void clear_list() {
-        Node<T>* n = dummy.next;
-        while (n != &dummy) {
+        Node<T>* n = dummy->next;
+        while (n != dummy) {
             Node<T>* temp = n;
             n = n->next;
             delete temp;
         }
-        dummy.next = &dummy;
-        dummy.prev = &dummy;
+        dummy->next = dummy;
+        dummy->prev = dummy;
         size = 0;
     }
 
     void print() {
-        Node<T>* n = dummy.next;
-        while (n != &dummy) {
+        Node<T>* n = dummy->next;
+        while (n != dummy) {
             std::cout << n->data << std::endl;
             n = n->next;
         } 
@@ -105,21 +107,21 @@ public:
 
 private:
     int size;
-    Node<T> dummy; // dummy works as both the head and tail
+    Node<T>* dummy; // dummy works as both the head and tail
 
     Node<T>* GetNode(int i) {
         // assert(i >= 0 && i < size);
 
         Node<T>* n;
         if (i < size / 2) {
-            n = dummy.next;
+            n = dummy->next;
             for (int j = 0; j < i; ++j) {
                 n = n->next;
             }
 
         }
         else {
-            n = &dummy;
+            n = dummy;
             for (int j = size; j > i; --j) {
                 n = n->prev;
             }

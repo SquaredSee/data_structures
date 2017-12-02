@@ -24,15 +24,32 @@ public:
     }
 
     ~LinkedList() {
-        Node<T>* n = dummy.next;
-        while (n != &dummy) {
-            Node<T>* temp = n;
-            n = n->next;
-            delete temp;
-        }
-        delete dummy;
-        size = 0;
+        clear_list();
     }
+
+    // // copy constructor
+    // LinkedList(const LinkedList<T>& other) {
+    //     clear_list();
+
+        
+    // }
+
+    // // assignment operator
+    // LinkedList<T>& operator=(LinkedList<T> other) {
+    //     swap(*this, other);
+
+    //     return *this;
+    // }
+
+    // friend void swap(LinkedList<T>& first, LinkedList<T>& second) {
+    //     // enable ADL
+    //     using std::swap;
+
+    //     // by swapping the members of two objects,
+    //     // the two objects are effectively swapped
+    //     swap(first.size, second.size);
+    //     swap(first.dummy, second.dummy);
+    // }
 
     void add(int i, T x) {
         assert(i >= 0 && i <= size);
@@ -41,7 +58,9 @@ public:
 
     T get(int i) {
         assert(i >= 0 && i < size);
-        return GetNode(i)->data;
+        Node<T>* x = GetNode(i);
+        T y = x->data;
+        return y;
     }
 
     T set(int i, T x) {
@@ -58,6 +77,18 @@ public:
         T x = n->data;
         RemoveNode(n);
         return x;
+    }
+
+    void clear_list() {
+        Node<T>* n = dummy.next;
+        while (n != &dummy) {
+            Node<T>* temp = n;
+            n = n->next;
+            delete temp;
+        }
+        dummy.next = &dummy;
+        dummy.prev = &dummy;
+        size = 0;
     }
 
     void print() {

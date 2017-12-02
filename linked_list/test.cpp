@@ -13,9 +13,16 @@ int main() {
     x.add(3, 10);
     x.add(4, 11);
     x.add(5, 12);
-    cout << x.get(1) << endl;
+    int xx = x.get(1);
+    cout << xx << endl;
     cout << x.remove(3) << endl;
     x.print();
+
+    // LinkedList<int> z;
+    // z.add(0,1);
+    // z.print();
+    // z = x;
+    // z.print();
 
     LLStack<int> y;
     y.push(1);

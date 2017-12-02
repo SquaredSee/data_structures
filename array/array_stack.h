@@ -2,6 +2,7 @@
 #define ARRAY_STACK_H
 
 #include <algorithm> // std::max
+#include <iostream> // std::cout, std::endl
 #include "array.h"
 
 template <typename T>
@@ -38,6 +39,12 @@ public:
             temp[i] = arr[i];
         }
         arr = temp;
+    }
+
+    void print() {
+        for (int i = 0; i < n; ++i) {
+            std::cout << arr[i] << std::endl;
+        }
     }
 
 private:

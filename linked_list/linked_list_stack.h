@@ -3,7 +3,6 @@
 
 #include "linked_list.h"
 #include <iostream> // std::cout, std::endl
-#include <cassert> // assert
 
 template <typename T>
 class LLStack {

@@ -13,7 +13,6 @@ http://opendatastructures.org/ods-cpp.pdf chapter 2
 #define ARRAY_H
 
 #include <algorithm> // std::copy, std::swap
-#include <cstddef> // std::size_t
 #include <cassert> // assert
 
 template <typename T>

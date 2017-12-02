@@ -2,6 +2,7 @@
 Repository for learning data structures
 
 Resources:
+
 https://stackoverflow.com/questions/4172722/what-is-the-rule-of-three
 https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
 https://stackoverflow.com/questions/5695548/public-friend-swap-member-function

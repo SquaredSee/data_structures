@@ -35,7 +35,7 @@ public:
 
     void resize() {
         Array<T> temp(std::max(2 * n, 1));
-        for (int i = 0; i < arr.length(); ++i) {
+        for (int i = 0; i < n; ++i) {
             temp[i] = arr[i];
         }
         arr = temp;

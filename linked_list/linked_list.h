@@ -4,7 +4,7 @@
 // A templated doubly linked list
 // NOT USING COPY SWAP YET
 
-#include <iostream> // std::cout, std::endl
+#include <iostream> // std::std::cout, std::endl
 #include <cassert> // assert
 
 template <typename T>
@@ -25,40 +25,51 @@ public:
     }
 
     ~LinkedList() {
+        std::cout << "deconstructing " << this << std::endl;
         clear_list();
         delete dummy;
     }
 
-    // // copy constructor
-    // LinkedList(const LinkedList<T>& other) {
-    //     clear_list();
+    // copy constructor
+    LinkedList(const LinkedList<T>& other) {
+        std::cout << "copying " << &other << " into " << this << std::endl;
+        size = 0;
+        dummy = new Node<T>();
+        dummy->next = dummy;
+        dummy->prev = dummy;
 
-        
-    // }
+        Node<T>* current = other.dummy->next;
+        while (current != other.dummy) {
+            add(size, current->data);
+            current = current->next;
+        }
+    }
 
-    // // assignment operator
-    // LinkedList<T>& operator=(LinkedList<T> other) {
-    //     swap(*this, other);
+    // assignment operator
+    LinkedList<T>& operator=(LinkedList<T> other) {
+        std::cout << "assigning " << this << " to " << &other << std::endl;
+        swap(*this, other);
 
-    //     return *this;
-    // }
+        return *this;
+    }
 
-    // friend void swap(LinkedList<T>& first, LinkedList<T>& second) {
-    //     // enable ADL
-    //     using std::swap;
+    friend void swap(LinkedList<T>& first, LinkedList<T>& second) {
+        std::cout << "swapping " << &first << " and " << &second << std::endl;
+        // enable ADL
+        using std::swap;
 
-    //     // by swapping the members of two objects,
-    //     // the two objects are effectively swapped
-    //     swap(first.size, second.size);
-    //     swap(first.dummy, second.dummy);
-    // }
+        // by swapping the members of two objects,
+        // the two objects are effectively swapped
+        swap(first.size, second.size);
+        swap(first.dummy, second.dummy);
+    }
 
     void add(int i, T x) {
         assert(i >= 0 && i <= size);
         AddBefore(GetNode(i), x);
     }
 
-    T get(int i) {
+    T get(int i) const {
         assert(i >= 0 && i < size);
         Node<T>* x = GetNode(i);
         T y = x->data;
@@ -105,11 +116,33 @@ public:
         return size;
     }
 
+
+
 private:
     int size;
     Node<T>* dummy; // dummy works as both the head and tail
 
     Node<T>* GetNode(int i) {
+        // assert(i >= 0 && i < size);
+
+        Node<T>* n;
+        if (i < size / 2) {
+            n = dummy->next;
+            for (int j = 0; j < i; ++j) {
+                n = n->next;
+            }
+
+        }
+        else {
+            n = dummy;
+            for (int j = size; j > i; --j) {
+                n = n->prev;
+            }
+        }
+        return n;
+    }
+
+    Node<T>* GetNode(int i) const {
         // assert(i >= 0 && i < size);
 
         Node<T>* n;

@@ -28,13 +28,13 @@ public:
         size(other.size),
         arr(size ? new T[size]() : nullptr) {
 
-        if (arr) {
-            // std::copy(other.arr, other.arr + size, arr);
+            if (arr) {
+                // std::copy(other.arr, other.arr + size, arr);
 
-            for (int i = 0; i < size; ++i) {
-                arr[i] = other[i];
+                for (int i = 0; i < size; ++i) {
+                    arr[i] = other[i];
+                }
             }
-        }
     }
 
     // move constructor

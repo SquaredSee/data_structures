@@ -1,8 +1,7 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-// A templated doubly linked list
-// NOT USING COPY SWAP YET
+// A templated doubly linked list with copy-swap implemented
 
 #include <iostream> // std::std::cout, std::endl
 #include <cassert> // assert
@@ -17,11 +16,12 @@ struct Node {
 template <typename T>
 class LinkedList {
 public:
-    LinkedList() {
-        size = 0;
-        dummy = new Node<T>();
-        dummy->next = dummy;
-        dummy->prev = dummy;
+    LinkedList():
+        size(0),
+        dummy(new Node<T>()) {
+
+            dummy->next = dummy;
+            dummy->prev = dummy;
     }
 
     ~LinkedList() {
@@ -31,18 +31,19 @@ public:
     }
 
     // copy constructor
-    LinkedList(const LinkedList<T>& other) {
-        std::cout << "copying " << &other << " into " << this << std::endl;
-        size = 0;
-        dummy = new Node<T>();
-        dummy->next = dummy;
-        dummy->prev = dummy;
+    LinkedList(const LinkedList<T>& other):
+        size(0),
+        dummy(new Node<T>()) {
 
-        Node<T>* current = other.dummy->next;
-        while (current != other.dummy) {
-            add(size, current->data);
-            current = current->next;
-        }
+            std::cout << "copying " << &other << " into " << this << std::endl;
+            dummy->next = dummy;
+            dummy->prev = dummy;
+
+            Node<T>* current = other.dummy->next;
+            while (current != other.dummy) {
+                add(size, current->data);
+                current = current->next;
+            }
     }
 
     // assignment operator

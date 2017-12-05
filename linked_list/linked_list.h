@@ -113,7 +113,7 @@ public:
         } 
     }
 
-    int length() {
+    int get_length() {
         return size;
     }
 

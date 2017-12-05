@@ -24,8 +24,8 @@ public:
         list.print(); 
     }
 
-    int length() {
-        return list.length();
+    int get_length() {
+        return list.get_length();
     }
 
 private:
